@@ -24,7 +24,7 @@ const Posts = (props: PostsProps) => {
     });
   }
 
-  return <div className="flex flex-col">{postsList}</div>;
+  return <div className="flex flex-col font-body">{postsList}</div>;
 };
 
 export default Posts;

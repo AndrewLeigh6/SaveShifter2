@@ -61,7 +61,7 @@ const SaveShifter = () => {
 
   return (
     <div className="flex flex-col max-w-md mx-auto">
-      <p className="text-2xl font-bold pt-5 pb-5">SaveShifter</p>
+      <p className="font-title text-2xl font-bold pt-5 pb-5">SaveShifter</p>
       <Posts savedPosts={savedPosts} />
     </div>
   );

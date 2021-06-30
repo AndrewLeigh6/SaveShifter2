@@ -34,7 +34,12 @@ const Post = (props: PostProps) => {
       key={props.savedPost.name}
     >
       {renderImage(props.savedPost)}
-      <p>{props.savedPost.title}</p>
+      <div>
+        <p>{props.savedPost.title}</p>
+        <p className="text-red-500">
+          {props.savedPost.subreddit_name_prefixed}
+        </p>
+      </div>
     </div>
   );
 };
