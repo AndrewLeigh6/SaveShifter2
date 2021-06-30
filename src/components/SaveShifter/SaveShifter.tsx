@@ -60,9 +60,9 @@ const SaveShifter = () => {
       return savedPosts.map((savedPost) => {
         if (isSubmission(savedPost) && savedPost.over_18 === false) {
           return (
-            <div>
+            <div key={savedPost.name}>
               <p>{savedPost.title}</p>
-              <img src={savedPost.url} alt={savedPost.title} />
+              {renderImage(savedPost)}
             </div>
           );
         }
@@ -70,6 +70,19 @@ const SaveShifter = () => {
       });
     }
 
+    return null;
+  };
+
+  const renderImage = (savedPost: Snoowrap.Submission): JSX.Element | null => {
+    if (savedPost.preview) {
+      const image = (
+        <img
+          src={savedPost.preview.images[0].resolutions[0].url}
+          alt={savedPost.title}
+        />
+      );
+      return image;
+    }
     return null;
   };
 
