@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Snoowrap from "snoowrap";
+import Posts from "../Posts/Posts";
 
 const SaveShifter = () => {
   const [savedPosts, setSavedPosts] =
@@ -22,7 +23,10 @@ const SaveShifter = () => {
   const getSavedPosts = async (
     requester: Snoowrap
   ): Promise<Snoowrap.Listing<Snoowrap.Comment | Snoowrap.Submission>> => {
-    const savedPosts = await requester.getMe().getSavedContent();
+    const savedPosts = await requester
+      .getMe()
+      .getSavedContent()
+      .then((res) => res.fetchMore({ amount: 50 }));
     return savedPosts;
   };
 
@@ -55,47 +59,10 @@ const SaveShifter = () => {
     }
   }, [savedPosts]);
 
-  const renderSavedPosts = (): (JSX.Element | null)[] | null => {
-    if (savedPosts) {
-      return savedPosts.map((savedPost) => {
-        if (isSubmission(savedPost) && savedPost.over_18 === false) {
-          return (
-            <div key={savedPost.name}>
-              <p>{savedPost.title}</p>
-              {renderImage(savedPost)}
-            </div>
-          );
-        }
-        return null;
-      });
-    }
-
-    return null;
-  };
-
-  const renderImage = (savedPost: Snoowrap.Submission): JSX.Element | null => {
-    if (savedPost.preview) {
-      const image = (
-        <img
-          src={savedPost.preview.images[0].resolutions[0].url}
-          alt={savedPost.title}
-        />
-      );
-      return image;
-    }
-    return null;
-  };
-
-  function isSubmission(
-    listing: Snoowrap.Comment | Snoowrap.Submission
-  ): listing is Snoowrap.Submission {
-    return (listing as Snoowrap.Submission).title !== undefined;
-  }
-
   return (
-    <div>
-      <p>SaveShifter</p>
-      <div>{renderSavedPosts()}</div>
+    <div className="flex flex-col max-w-md mx-auto">
+      <p className="text-2xl font-bold pt-5 pb-5">SaveShifter</p>
+      <Posts savedPosts={savedPosts} />
     </div>
   );
 };

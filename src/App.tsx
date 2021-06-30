@@ -3,7 +3,7 @@ import SaveShifter from "./components/SaveShifter/SaveShifter";
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg-indigo-500 text-white">
       <SaveShifter />
     </div>
   );
