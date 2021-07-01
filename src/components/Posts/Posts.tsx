@@ -18,7 +18,7 @@ const Posts = (props: PostsProps) => {
   if (props.savedPosts) {
     postsList = props.savedPosts.map((savedPost) => {
       if (isSubmission(savedPost) && savedPost.over_18 === false) {
-        return <Post savedPost={savedPost} />;
+        return <Post savedPost={savedPost} key={savedPost.name} />;
       }
       return null;
     });

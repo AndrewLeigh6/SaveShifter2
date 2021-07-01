@@ -29,10 +29,7 @@ const Post = (props: PostProps) => {
   };
 
   return (
-    <div
-      className="flex rounded-xl py-6 px-8 mb-4 bg-indigo-700"
-      key={props.savedPost.name}
-    >
+    <div className="flex rounded-xl py-6 px-8 mb-4 bg-indigo-700">
       {renderImage(props.savedPost)}
       <div>
         <p>{props.savedPost.title}</p>
