@@ -7,25 +7,17 @@ interface PostProps {
 
 const Post = (props: PostProps) => {
   const renderImage = (savedPost: Snoowrap.Submission): JSX.Element | null => {
+    let src = "https://via.placeholder.com/108x108";
+    let alt = "placeholder";
+
     if (savedPost.preview) {
-      const image = (
-        <img
-          className="mr-5"
-          src={savedPost.preview.images[0].resolutions[0].url}
-          alt={savedPost.title}
-        />
-      );
-      return image;
-    } else {
-      const image = (
-        <img
-          className="mr-5"
-          src="https://via.placeholder.com/108x108"
-          alt="placeholder"
-        />
-      );
-      return image;
+      src = savedPost.preview.images[0].resolutions[0].url;
+      alt = savedPost.title;
     }
+
+    let image = <img className="mr-5" src={src} alt={alt} />;
+
+    return image;
   };
 
   return (
